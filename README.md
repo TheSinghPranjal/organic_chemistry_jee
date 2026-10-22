@@ -1,17 +1,21 @@
-# organic_chemistry_jee
+# Organic notebook
 
-A new Flutter project.
+A Flutter learning notebook for JEE organic chemistry. The home screen lists twelve chapters. General Organic Chemistry is filled in; the other chapters are marked coming soon.
 
-## Getting Started
+Questions, options, and explanations in this app are original. They are organised as Level 1, Level 2, and Level 3, each with the exercises in that level, so a later chapter can drop into the same shape.
 
-This project is a starting point for a Flutter application.
+## Run
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter pub get
+flutter run
+```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Progress (answered questions and review flags) is stored on the device with `shared_preferences`.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Add a chapter
+
+1. Add `lib/data/chapters/<id>.dart` that exports a `Chapter` with levels, exercises, and questions.
+2. Replace the matching `Chapter.comingSoon(...)` entry in `lib/data/catalog.dart`.
+
+Question kinds are single-correct, multi-correct, matching, and integer. A passage question is a single-correct question with `passage` set. Structure drawings are `MolSketch` values painted in `lib/sketch`, not image files.
