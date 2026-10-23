@@ -106,6 +106,15 @@ class MNote {
   final String text;
 }
 
+/// A reaction arrow. [label] sits above the shaft.
+class MArrow {
+  const MArrow(this.start, this.end, {this.label = ''});
+
+  final Offset start;
+  final Offset end;
+  final String label;
+}
+
 class RingMark {
   const RingMark(this.center, this.radius);
 
@@ -120,6 +129,7 @@ class MolSketch {
     required this.bonds,
     this.notes = const [],
     this.rings = const [],
+    this.arrows = const [],
     this.newman,
     this.sawhorse,
     required this.width,
@@ -131,6 +141,7 @@ class MolSketch {
   final List<MBond> bonds;
   final List<MNote> notes;
   final List<RingMark> rings;
+  final List<MArrow> arrows;
   final Newman? newman;
   final Sawhorse? sawhorse;
   final double width;
@@ -198,6 +209,10 @@ class MolPainter extends CustomPainter {
       );
     }
 
+    for (final arrow in sketch.arrows) {
+      _drawArrow(canvas, arrow, pen);
+    }
+
     for (final ring in sketch.rings) {
       canvas.drawPath(
         inkOval(ring.center, ring.radius, ring.radius, inkSeed(sketch.name)),
@@ -255,6 +270,31 @@ class MolPainter extends CustomPainter {
     canvas.drawPath(inkLine(start, end, seed), pen);
     canvas.drawPath(inkLine(start + normal * gap, end + normal * gap, seed + 1), pen);
     canvas.drawPath(inkLine(start - normal * gap, end - normal * gap, seed + 2), pen);
+  }
+
+  void _drawArrow(Canvas canvas, MArrow arrow, Paint pen) {
+    final delta = arrow.end - arrow.start;
+    final len = delta.distance;
+    if (len < 8) return;
+    final dir = delta / len;
+    final normal = Offset(-dir.dy, dir.dx);
+    const head = 12.0;
+    final tip = arrow.end;
+    final base = tip - dir * head;
+    canvas.drawPath(
+      inkLine(arrow.start, base, inkSeed('${sketch.name}-${arrow.label}-${arrow.start.dx}'), amplitude: 0.7),
+      pen,
+    );
+    final headPath = Path()
+      ..moveTo(tip.dx, tip.dy)
+      ..lineTo(base.dx + normal.dx * 5.5, base.dy + normal.dy * 5.5)
+      ..lineTo(base.dx - normal.dx * 5.5, base.dy - normal.dy * 5.5)
+      ..close();
+    canvas.drawPath(headPath, Paint()..color = InkColors.blue);
+    if (arrow.label.isNotEmpty) {
+      final mid = Offset((arrow.start.dx + arrow.end.dx) / 2, (arrow.start.dy + arrow.end.dy) / 2 - 28);
+      _drawNote(canvas, MNote(mid.dx, mid.dy, arrow.label));
+    }
   }
 
   void _drawWedge(Canvas canvas, Offset start, Offset end, Paint pen, int seed) {
