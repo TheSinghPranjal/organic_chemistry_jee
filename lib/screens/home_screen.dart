@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           Text('Organic notebook', style: InkText.title),
           const SizedBox(height: 4),
           Text(
-            'Twelve chapters. General Organic Chemistry, Isomerism, and Hydrocarbons are inked in.',
+            'Twelve chapters. General Organic Chemistry, Isomerism, Hydrocarbons, and Halides are inked in.',
             style: InkText.body.copyWith(color: InkColors.brown),
           ),
           const SizedBox(height: 14),
