@@ -1,9 +1,10 @@
 import '../models/content.dart';
 import 'chapters/goc.dart';
+import 'chapters/halides.dart';
 import 'chapters/hydrocarbons.dart';
 import 'chapters/isomerism.dart';
 
-/// Course map. General Organic Chemistry, Isomerism, and Hydrocarbons are filled in.
+/// Course map. General Organic Chemistry, Isomerism, Hydrocarbons, and Halides are filled in.
 ///
 /// To add a chapter in a later change:
 /// 1. Add `lib/data/chapters/<id>.dart` exporting a [Chapter] with levels,
@@ -15,12 +16,7 @@ final List<Chapter> chapters = [
   gocChapter,
   isomerismChapter,
   hydrocarbonsChapter,
-  Chapter.comingSoon(
-    id: 'halides',
-    title: 'Halides',
-    subtitle: 'Alkyl and aryl halides',
-    doodle: 3,
-  ),
+  halidesChapter,
   Chapter.comingSoon(
     id: 'alcohols-ethers',
     title: 'Alcohols and Ethers',
