@@ -61,14 +61,23 @@ class Question {
     }
   }
 
+  /// Row letter to the sorted Column II letters, for example `A` → `PS`.
   Map<String, String> get matchKey {
     final map = <String, String>{};
-    for (final part in answer.split(',')) {
-      final bits = part.split('-');
-      if (bits.length == 2) map[bits[0]] = bits[1];
+    for (final part in canonMatch(answer).split(',')) {
+      final dash = part.indexOf('-');
+      if (dash <= 0) continue;
+      map[part.substring(0, dash)] = part.substring(dash + 1);
     }
     return map;
   }
+
+  Set<String> lettersFor(String row) {
+    return (matchKey[row] ?? '').split('').where((letter) => letter.isNotEmpty).toSet();
+  }
+
+  /// A matrix row may match more than one code in Column II.
+  bool get matchAllowsMany => matchKey.values.any((letters) => letters.length > 1);
 
   String get kindLabel {
     switch (kind) {
@@ -105,9 +114,24 @@ String canonMatch(String raw) {
       .split(',')
       .map((part) => part.trim().toUpperCase())
       .where((part) => part.isNotEmpty)
+      .map(_canonPair)
       .toList()
     ..sort();
   return parts.join(',');
+}
+
+String _canonPair(String part) {
+  final dash = part.indexOf('-');
+  if (dash <= 0) return part;
+  final row = part.substring(0, dash).trim();
+  final letters = part
+      .substring(dash + 1)
+      .split('')
+      .where((letter) => RegExp('[A-Z]').hasMatch(letter))
+      .toSet()
+      .toList()
+    ..sort();
+  return '$row-${letters.join()}';
 }
 
 class Exercise {

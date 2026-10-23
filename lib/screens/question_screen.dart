@@ -34,7 +34,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   bool _hydrated = false;
   String? _single;
   final Set<String> _multi = {};
-  final Map<String, String> _match = {};
+  final Map<String, Set<String>> _match = {};
   String? _hint;
 
   Question get question => widget.exercise.questions[widget.index];
@@ -62,8 +62,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
         break;
       case QuestionKind.match:
         for (final part in response.split(',')) {
-          final bits = part.split('-');
-          if (bits.length == 2) _match[bits[0]] = bits[1];
+          final dash = part.indexOf('-');
+          if (dash <= 0) continue;
+          final row = part.substring(0, dash);
+          _match[row] = part
+              .substring(dash + 1)
+              .split('')
+              .where((letter) => letter.trim().isNotEmpty)
+              .toSet();
         }
         break;
       case QuestionKind.integer:
@@ -196,12 +202,26 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         for (final right in question.column2)
                           _LetterChip(
                             label: right.key,
-                            selected: _match[entry.key] == right.key,
-                            good: _submitted && question.matchKey[entry.key] == right.key && _match[entry.key] == right.key,
-                            bad: _submitted && _match[entry.key] == right.key && question.matchKey[entry.key] != right.key,
+                            selected: _match[entry.key]?.contains(right.key) ?? false,
+                            good: _submitted &&
+                                question.lettersFor(entry.key).contains(right.key) &&
+                                (_match[entry.key]?.contains(right.key) ?? false),
+                            bad: _submitted &&
+                                (_match[entry.key]?.contains(right.key) ?? false) &&
+                                !question.lettersFor(entry.key).contains(right.key),
                             onTap: _submitted
                                 ? null
-                                : () => setState(() => _match[entry.key] = right.key),
+                                : () => setState(() {
+                                      final picked = _match.putIfAbsent(entry.key, () => <String>{});
+                                      if (question.matchAllowsMany) {
+                                        if (!picked.add(right.key)) picked.remove(right.key);
+                                      } else {
+                                        picked
+                                          ..clear()
+                                          ..add(right.key);
+                                      }
+                                      _hint = null;
+                                    }),
                           ),
                       ],
                     ),
@@ -335,11 +355,19 @@ class _QuestionScreenState extends State<QuestionScreen> {
       }
       response = ( _multi.toList()..sort()).join(',');
     } else if (question.kind == QuestionKind.match) {
-      if (question.column1.any((entry) => !_match.containsKey(entry.key))) {
-        setState(() => _hint = 'Pair every entry in Column I.');
+      if (question.column1.any((entry) => (_match[entry.key] ?? const <String>{}).isEmpty)) {
+        setState(() {
+          _hint = question.matchAllowsMany
+              ? 'Choose at least one letter in every row.'
+              : 'Pair every entry in Column I.';
+        });
         return;
       }
-      final parts = question.column1.map((entry) => '${entry.key}-${_match[entry.key]}').toList()..sort();
+      final parts = question.column1.map((entry) {
+        final letters = (_match[entry.key]!.toList()..sort()).join();
+        return '${entry.key}-$letters';
+      }).toList()
+        ..sort();
       response = parts.join(',');
     } else {
       if (canonInt(_integer.text) == null) {

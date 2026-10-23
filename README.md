@@ -1,8 +1,8 @@
 # Organic notebook
 
-A Flutter learning notebook for JEE organic chemistry. The home screen lists twelve chapters. General Organic Chemistry is filled in; the other chapters are marked coming soon.
+A Flutter learning notebook for JEE organic chemistry. The home screen lists twelve chapters. General Organic Chemistry and Isomerism are filled in; the other chapters are marked coming soon.
 
-Questions, options, and explanations in this app are original. They are organised as Level 1, Level 2, and Level 3, each with the exercises in that level, so a later chapter can drop into the same shape.
+Questions, options, and explanations in this app are original. General Organic Chemistry is organised as Level 1, Level 2, and Level 3, each with the exercises in that level. Isomerism is organised as Exercise 1 (Levels 1 to 3) and then Exercises 2 to 5. A later chapter can drop into the same screens.
 
 ## Run
 

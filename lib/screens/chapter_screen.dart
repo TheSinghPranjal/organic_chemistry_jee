@@ -32,7 +32,7 @@ class ChapterScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           const HighlighterPill(
-            text: 'Pick a level, then an exercise. The question numbers restart in each exercise.',
+            text: 'Pick a set. Question numbers restart inside each set.',
           ),
           const SizedBox(height: 16),
           for (final level in chapter.levels) ...[

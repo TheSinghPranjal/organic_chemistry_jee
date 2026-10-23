@@ -20,12 +20,12 @@ class HomeScreen extends StatelessWidget {
           Text('Organic notebook', style: InkText.title),
           const SizedBox(height: 4),
           Text(
-            'Twelve chapters. General Organic Chemistry is inked in.',
+            'Twelve chapters. General Organic Chemistry and Isomerism are inked in.',
             style: InkText.body.copyWith(color: InkColors.brown),
           ),
           const SizedBox(height: 14),
           const HighlighterPill(
-            text: 'Open a chapter, pick a level and an exercise, then work the numbered questions.',
+            text: 'Open a chapter, pick a set, then work the numbered questions.',
           ),
           const SizedBox(height: 16),
           for (var i = 0; i < chapters.length; i++) ...[

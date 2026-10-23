@@ -24,9 +24,9 @@ void main() {
     for (final chapter in chapters) {
       expect(find.text(chapter.title), findsOneWidget);
     }
-    expect(find.text('Coming soon'), findsNWidgets(11));
+    expect(find.text('Coming soon'), findsNWidgets(10));
 
-    await tester.tap(find.byKey(const Key('chapter-isomerism')));
+    await tester.tap(find.byKey(const Key('chapter-hydrocarbons')));
     await tester.pumpAndSettle();
     expect(find.text('This chapter is not inked yet.'), findsOneWidget);
     await tester.tap(find.text('Back to the list'));
@@ -83,7 +83,8 @@ void main() {
     addTearDown(tester.view.resetDevicePixelRatio);
 
     final store = ProgressStore(persist: false);
-    for (final level in chapters.first.levels) {
+    for (final chapter in chapters.where((chapter) => chapter.available)) {
+    for (final level in chapter.levels) {
       for (final exercise in level.exercises) {
         for (var index = 0; index < exercise.questions.length; index++) {
           await tester.pumpWidget(
@@ -108,6 +109,7 @@ void main() {
           }
         }
       }
+    }
     }
   });
 

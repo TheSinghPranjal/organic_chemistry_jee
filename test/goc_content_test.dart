@@ -19,7 +19,7 @@ void main() {
       'Practical Organic Chemistry',
       'Nomenclature',
     ]);
-    expect(chapters.where((chapter) => chapter.available).map((chapter) => chapter.id), ['goc']);
+    expect(chapters.where((chapter) => chapter.available).map((chapter) => chapter.id), ['goc', 'isomerism']);
   });
 
   test('GOC keeps the level and exercise outline and the question counts', () {
