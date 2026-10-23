@@ -1,11 +1,12 @@
 import '../models/content.dart';
 import 'chapters/alcohols.dart';
+import 'chapters/carbonyl.dart';
 import 'chapters/goc.dart';
 import 'chapters/halides.dart';
 import 'chapters/hydrocarbons.dart';
 import 'chapters/isomerism.dart';
 
-/// Course map. General Organic Chemistry, Isomerism, Hydrocarbons, Halides, and Alcohols and Ethers are filled in.
+/// Course map. General Organic Chemistry, Isomerism, Hydrocarbons, Halides, Alcohols and Ethers, and Carbonyl Compounds are filled in.
 ///
 /// To add a chapter in a later change:
 /// 1. Add `lib/data/chapters/<id>.dart` exporting a [Chapter] with levels,
@@ -19,12 +20,7 @@ final List<Chapter> chapters = [
   hydrocarbonsChapter,
   halidesChapter,
   alcoholsChapter,
-  Chapter.comingSoon(
-    id: 'carbonyl',
-    title: 'Carbonyl Compounds',
-    subtitle: 'Aldehydes and ketones',
-    doodle: 5,
-  ),
+  carbonylChapter,
   Chapter.comingSoon(
     id: 'carboxylic',
     title: 'Carboxylic Acids and Derivatives',
