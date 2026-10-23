@@ -21,7 +21,7 @@ void main() {
     ]);
     expect(
       chapters.where((chapter) => chapter.available).map((chapter) => chapter.id),
-      ['goc', 'isomerism', 'hydrocarbons', 'halides', 'alcohols-ethers'],
+      ['goc', 'isomerism', 'hydrocarbons', 'halides', 'alcohols-ethers', 'carbonyl'],
     );
   });
 
