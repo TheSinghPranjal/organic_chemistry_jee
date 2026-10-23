@@ -1,11 +1,11 @@
 {
-    "name": "organic_chemistry_jee",
-    "short_name": "organic_chemistry_jee",
+    "name": "Organic notebook",
+    "short_name": "Organic notebook",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A handwritten notebook for learning JEE organic chemistry.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
