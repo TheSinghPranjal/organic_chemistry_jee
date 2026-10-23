@@ -24,9 +24,9 @@ void main() {
     for (final chapter in chapters) {
       expect(find.text(chapter.title), findsOneWidget);
     }
-    expect(find.text('Coming soon'), findsNWidgets(8));
+    expect(find.text('Coming soon'), findsNWidgets(7));
 
-    await tester.tap(find.byKey(const Key('chapter-alcohols-ethers')));
+    await tester.tap(find.byKey(const Key('chapter-carbonyl')));
     await tester.pumpAndSettle();
     expect(find.text('This chapter is not inked yet.'), findsOneWidget);
     await tester.tap(find.text('Back to the list'));
