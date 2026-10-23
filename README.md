@@ -1,8 +1,8 @@
 # Organic notebook
 
-A Flutter learning notebook for JEE organic chemistry. The home screen lists twelve chapters. General Organic Chemistry, Isomerism, Hydrocarbons, Halides, Alcohols and Ethers, Carbonyl Compounds, and Carboxylic Acids and Derivatives are filled in; the other chapters are marked coming soon.
+A Flutter learning notebook for JEE organic chemistry. The home screen lists twelve chapters. General Organic Chemistry, Isomerism, Hydrocarbons, Halides, Alcohols and Ethers, Carbonyl Compounds, Carboxylic Acids and Derivatives, and Amines are filled in; the other chapters are marked coming soon.
 
-Questions, options, and explanations in this app are original. General Organic Chemistry is organised as Level 1, Level 2, and Level 3, each with the exercises in that level. Isomerism is organised as Exercise 1 (Levels 1 to 3) and then Exercises 2 to 5. Hydrocarbons, Halides, Alcohols and Ethers, Carbonyl Compounds, and Carboxylic Acids and Derivatives are each organised as Exercise 1 (Levels 1 and 2) and then Exercises 2 to 5. Phenols are part of Alcohols and Ethers. A later chapter can drop into the same screens.
+Questions, options, and explanations in this app are original. General Organic Chemistry is organised as Level 1, Level 2, and Level 3, each with the exercises in that level. Isomerism is organised as Exercise 1 (Levels 1 to 3) and then Exercises 2 to 5. Hydrocarbons, Halides, Alcohols and Ethers, Carbonyl Compounds, Carboxylic Acids and Derivatives, and Amines are each organised as Exercise 1 (Levels 1 and 2) and then Exercises 2 to 5. Phenols are part of Alcohols and Ethers. A later chapter can drop into the same screens.
 
 ## Run
 
